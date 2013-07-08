@@ -306,20 +306,27 @@
                     if (items && items.length > 0) {
                         var first = $(items[0]);
                         $.each(this.clientSelectItems, function() {
-                            if (this.id == first.attr("id")) {
+                            if (this.label == inputLabel) {
                                 label = this.label;
                                 value = this.value;
                                 return false;
                             }
                         });
-                    } else {
-                        label = inputLabel;
-                        value = "";
-                    }
-                }
 
-                if (label) {
-                    return {'label': label, 'value': value};
+                    } else {
+                        this.container.removeClass("rf-sel-fld-err");
+
+                        var prevValue = this.selValueInput.val();
+                        if (prevValue && prevValue != "") {
+                            $.each(this.clientSelectItems, function() {
+                                if (this.value == prevValue) {
+                                    label = this.label;
+                                    value = this.value;
+                                    return false;
+                                }
+                            });
+                        }
+                    }
                 }
             },
 
