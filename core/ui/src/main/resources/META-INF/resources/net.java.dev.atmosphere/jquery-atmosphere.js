@@ -1524,8 +1524,8 @@ jQuery.atmosphere = function() {
                                 _triggerOpen(rq);
                             }
                             // MSIE 9 and lower status can be higher than 1000, Chrome can be 0
-                            var status = 0;
-                            if (ajaxRequest.readyState !== 0) {
+                            var status = 200;
+                            if (ajaxRequest.readyState > 1) {
                                 status = ajaxRequest.status > 1000 ? 0 : ajaxRequest.status;
                             }
 
@@ -1702,8 +1702,8 @@ jQuery.atmosphere = function() {
 
 			function _reconnect(ajaxRequest, request, reconnectInterval) {
 				if (request.reconnect || (request.suspend && _subscribed)) {
-					var status = 0;
-					if (ajaxRequest.readyState !== 0) {
+					var status = 200;
+					if (ajaxRequest.readyState > 1) {
 						status = ajaxRequest.status > 1000 ? 0 : ajaxRequest.status;
 					}
 					_response.status = status === 0 ? 204 : status;
